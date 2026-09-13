@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>设备售后与运维助手</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">AI OPERATIONS COPILOT / DEMO</p>
+        <h1>设备售后与运维助手</h1>
+      </div>
+      <div class="header-meta">
+        <span class="demo-badge">模拟数据</span>
+        <span id="api-status" class="status-dot">连接中</span>
+      </div>
+    </header>
+
+    <main class="shell">
+      <section class="metric-row" id="summary-cards"></section>
+      <section class="workspace">
+        <aside class="panel device-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">设备目录</p>
+              <h2>门店设备</h2>
+            </div>
+            <button class="icon-button" id="refresh-button" title="刷新">↻</button>
+          </div>
+          <div id="device-list" class="device-list"><div class="loading">正在加载设备...</div></div>
+        </aside>
+
+        <section class="panel diagnosis-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">诊断工作台</p>
+              <h2 id="selected-device-title">请选择设备</h2>
+            </div>
+            <span id="risk-pill" class="risk-pill neutral">等待诊断</span>
+          </div>
+          <div id="device-overview" class="device-overview empty-state">
+            选择左侧设备，查看状态和告警。
+          </div>
+          <div class="conversation" id="conversation">
+            <div class="assistant-message">
+              <span class="message-label">AI 助手</span>
+              <p>我会把设备事实、知识库证据和风险规则分开呈现。所有处置建议都需要人工确认。</p>
+            </div>
+          </div>
+          <form id="diagnosis-form" class="question-form">
+            <label for="question">描述现场问题</label>
+            <div class="question-row">
+              <input id="question" name="question" placeholder="例如：设备多次温度超限，故障码 E03 怎么处理？" minlength="2" required />
+              <button class="primary-button" type="submit">开始诊断</button>
+            </div>
+            <p class="helper-text">建议先选择 `DEV-001` 体验温度告警和 E03 故障码场景。</p>
+          </form>
+        </section>
+
+        <aside class="side-stack">
+          <section class="panel evidence-panel">
+            <div class="panel-heading compact">
+              <div>
+                <p class="eyebrow">事实依据</p>
+                <h2>知识库引用</h2>
+              </div>
+              <span class="evidence-count" id="evidence-count">0 条</span>
+            </div>
+            <div id="evidence-list" class="evidence-list empty-state">完成一次诊断后显示引用。</div>
+          </section>
+          <section class="panel ticket-panel">
+            <div class="panel-heading compact">
+              <div>
+                <p class="eyebrow">工单协同</p>
+                <h2>工单草稿</h2>
+              </div>
+              <span class="review-badge">需人工确认</span>
+            </div>
+            <div id="ticket-content" class="ticket-content empty-state">诊断后可生成草稿，不会自动提交工单。</div>
+            <button id="draft-button" class="secondary-button" disabled>生成工单草稿</button>
+          </section>
+        </aside>
+      </section>
+    </main>
+    <div id="toast" class="toast" role="status"></div>
+    <script src="/app.js"></script>
+  </body>
+</html>
